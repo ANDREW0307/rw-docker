@@ -1,11 +1,15 @@
 FROM gcc:latest
+
+# Install necessary packages including pipx
 RUN apt-get update && apt-get install -y \
     cmake \
     teensy-loader-cli \
     python3 \
     python3-pip \
+    pipx \
     && rm -rf /var/lib/apt/lists/*
-RUN pip3 install platformio
-# any subsequent commands will be run in a directory named workspace in the container.
-# if such a directory doesn't exist, Docker will create one 
+
+# Use pipx to install platformio
+RUN pipx install platformio
+
 WORKDIR /workspace
